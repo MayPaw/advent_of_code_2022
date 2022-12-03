@@ -1,6 +1,6 @@
 package com.github.maypaw.advent_of_code;
 
-import com.github.maypaw.advent_of_code.data.day1.Data;
+import com.github.maypaw.advent_of_code.data.Data;
 import com.github.maypaw.advent_of_code.data.day1.DataProcessor;
 import com.github.maypaw.advent_of_code.data.day1.Elf;
 
@@ -14,7 +14,7 @@ public class SolutionGetter {
 
     }
 
-    public static Long getPartOneSolution() {
+    public static Long getDayOnePartOneSolution() {
         List<Elf> elves = DataProcessor.getProcessedData(Data.ALL_CALORIES);
         Optional<Elf> maxCalories = elves.stream()
                                          .max(Comparator.comparing(Elf::getCaloriesSum));
@@ -23,7 +23,7 @@ public class SolutionGetter {
                           .getCaloriesSum();
     }
 
-    public static Long getPartTwoSolution() {
+    public static Long getDayOnePartTwoSolution() {
         List<Elf> elves = DataProcessor.getProcessedData(Data.ALL_CALORIES);
         return elves.stream()
                                    .sorted(Comparator.comparing(Elf::getCaloriesSum)
