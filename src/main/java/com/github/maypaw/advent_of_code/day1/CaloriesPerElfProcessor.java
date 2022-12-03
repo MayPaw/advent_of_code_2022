@@ -1,11 +1,11 @@
-package com.github.maypaw.advent_of_code.data.day1;
+package com.github.maypaw.advent_of_code.day1;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class DataProcessor {
+public class CaloriesPerElfProcessor {
 
-    private DataProcessor() {
+    private CaloriesPerElfProcessor() {
 
     }
 
@@ -24,4 +24,5 @@ public class DataProcessor {
                      .map(Long::parseLong)
                      .toList();
     }
+
 }
