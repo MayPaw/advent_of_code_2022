@@ -8,16 +8,14 @@ public class SchemeProcessor {
 
     }
 
-    public static Move[][] getProcessedData(String scheme) {
+    public static String[][] getProcessedData(String scheme) {
         return Arrays.stream(scheme.split("\n"))
                      .map(SchemeProcessor::getMoves)
-                     .toArray(Move[][]::new);
+                     .toArray(String[][]::new);
     }
 
-    private static Move[] getMoves(String round) {
-        return Arrays.stream(round.split("\s"))
-                     .map(Move::valueOf)
-                     .toArray(Move[]::new);
+    private static String[] getMoves(String round) {
+        return round.split("\s");
     }
 
 }

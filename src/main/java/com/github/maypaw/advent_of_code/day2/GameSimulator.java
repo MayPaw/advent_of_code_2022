@@ -11,27 +11,48 @@ public class GameSimulator {
 
     }
 
-    public static Long getPlayerTotalScore(Move[][] winningScheme) {
+    public static Long getPlayerTotalScore(String[][] winningScheme) {
         validateScheme(winningScheme);
         return Arrays.stream(winningScheme)
                      .map(GameSimulator::countPlayerPoints)
                      .reduce(0L, Long::sum);
     }
 
-    private static Long countPlayerPoints(Move[] round) {
+    public static Long getPlannedPlayerTotalScore(String[][] winningScheme) {
+        validateScheme(winningScheme);
+        return Arrays.stream(winningScheme)
+                     .map(GameSimulator::countPlannedPlayerPoints)
+                     .reduce(0L, Long::sum);
+    }
+
+    private static Long countPlannedPlayerPoints(String[] round) {
+        if (Goal.valueOf(round[1]).type.equals(VICTORY)) {
+            String winningOption = OpponentMove.valueOf(round[0]).losesWith;
+            return OpponentMove.valueOf(winningOption).points + VICTORY.points;
+        }
+
+        if (Goal.valueOf(round[1]).type.equals(DEFEAT)) {
+            String losingOption = OpponentMove.valueOf(round[0]).winsWith;
+            return OpponentMove.valueOf(losingOption).points;
+        }
+
+        return OpponentMove.valueOf(round[0]).points + DRAW.points;
+    }
+
+    private static Long countPlayerPoints(String[] round) {
         GameState gameState = getGameState(round);
         if (gameState.equals(VICTORY)) {
-            return round[1].points + VICTORY.points;
+            return Move.valueOf(round[1]).points + VICTORY.points;
         }
 
         if (gameState.equals(DEFEAT)) {
-            return round[1].points;
+            return Move.valueOf(round[1]).points;
         }
 
-        return round[1].points + DRAW.points;
+        return Move.valueOf(round[1]).points + DRAW.points;
     }
 
-    private static void validateScheme(Move[][] winningScheme) {
+    private static void validateScheme(String[][] winningScheme) {
         Arrays.stream(winningScheme)
               .forEach(round -> {
                   if (Objects.isNull(round) || round.length != 2) {
@@ -40,12 +61,12 @@ public class GameSimulator {
               });
     }
 
-    private static GameState getGameState(Move[] round) {
-        if (round[0].moveName.equals(round[1].moveName)) {
+    private static GameState getGameState(String[] round) {
+        if (Move.valueOf(round[0]).moveName.equals(Move.valueOf(round[1]).moveName)) {
             return DRAW;
         }
 
-        if (round[0].winsWith.equals(round[1].moveName)) {
+        if (Move.valueOf(round[0]).winsWith.equals(Move.valueOf(round[1]).moveName)) {
             return DEFEAT;
         }
 

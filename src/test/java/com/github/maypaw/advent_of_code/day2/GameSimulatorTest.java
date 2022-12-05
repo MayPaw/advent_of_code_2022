@@ -4,7 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import static com.github.maypaw.advent_of_code.day2.GameState.DRAW;
 import static com.github.maypaw.advent_of_code.day2.GameState.VICTORY;
-import static com.github.maypaw.advent_of_code.day2.Move.*;
+import static com.github.maypaw.advent_of_code.day2.Move.X;
+import static com.github.maypaw.advent_of_code.day2.Move.Y;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -13,7 +14,7 @@ class GameSimulatorTest {
     @Test
     void shouldReturnValidSum_WhenCountingPlayerPoints() {
         // given
-        Move[][] scheme = {{A, Y}, {B, X}, {C, Z}};
+        String[][] scheme = {{"A", "Y"}, {"B", "X"}, {"C", "Z"}};
         Long expectedScore = 15L;
 
         // when
@@ -27,7 +28,7 @@ class GameSimulatorTest {
     @Test
     void shouldReturnZero_WhenGivenEmptyScheme() {
         // given
-        Move[][] scheme = {};
+        String[][] scheme = {};
         // when
         Long playerTotalScore = GameSimulator.getPlayerTotalScore(scheme);
 
@@ -38,7 +39,7 @@ class GameSimulatorTest {
     @Test
     void shouldAddVictoryPointsToMovePoints_WhenGameStateIsVictory() {
         // given
-        Move[][] scheme = {{A, Y}};
+        String[][] scheme = {{"A", "Y"}};
         Long expectedScore = Y.points + VICTORY.points;
 
         // when
@@ -51,7 +52,7 @@ class GameSimulatorTest {
     @Test
     void shouldAddDrawPointsToMovePoints_WhenGameStateIsDefeat() {
         // given
-        Move[][] scheme = {{A, X}};
+        String[][] scheme = {{"A", "X"}};
         Long expectedScore = X.points + DRAW.points;
 
         // when
@@ -65,7 +66,7 @@ class GameSimulatorTest {
     @Test
     void shouldAddNoPointsToMovePoints_WhenGameStateIsDefeat() {
         // given
-        Move[][] scheme = {{B, X}};
+        String[][] scheme = {{"B", "X"}};
         Long expectedScore = X.points;
 
         // when
@@ -79,7 +80,7 @@ class GameSimulatorTest {
     @Test
     void shouldThrowIllegalArgumentException_WhenGivenSchemeHasInvalidFormat() {
         // given
-        Move[][] scheme = {{A, B}, {A, B, C}};
+        String[][] scheme = {{"A", "B"}, {"A", "B", "C"}};
 
         // when / then
         assertThatThrownBy(() -> GameSimulator.getPlayerTotalScore(scheme)).isInstanceOf(IllegalArgumentException.class);

@@ -2,7 +2,6 @@ package com.github.maypaw.advent_of_code.day2;
 
 import org.junit.jupiter.api.Test;
 
-import static com.github.maypaw.advent_of_code.day2.Move.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -16,10 +15,10 @@ class SchemeProcessorTest {
                         C Y
                         B Z
                         """;
-        Move[][] expectedScheme = {{A, X}, {C, Y}, {B, Z}};
+        String[][] expectedScheme = {{"A", "X"}, {"C", "Y"}, {"B", "Z"}};
 
         // when
-        Move[][] processedData = SchemeProcessor.getProcessedData(scheme);
+        String[][] processedData = SchemeProcessor.getProcessedData(scheme);
 
         // then
         assertThat(processedData).isEqualTo(expectedScheme);
