@@ -12,6 +12,8 @@ public class SolutionRunner {
         System.out.println("Day 1 part 2 solution: " + MaximumCaloriesFinder.findTopThreeCaloriesSumsPerElf());
         System.out.println("Day 2 part 1 solution: " + GameSimulator.getPlayerTotalScore(
                 SchemeProcessor.getProcessedData(WinningScheme.CONTENT)));
+        System.out.println("Day 2 part 2 solution: " + GameSimulator.getPlannedPlayerTotalScore(
+                SchemeProcessor.getProcessedData(WinningScheme.CONTENT)));
     }
 
 }
